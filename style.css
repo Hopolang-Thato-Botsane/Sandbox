@@ -1,0 +1,50 @@
+/* 1. The Frame: Keeps everything tidy and hides the "tail" of the belt */
+.case-study-frame {
+  width: 100%;       /* Match the column width in image_1.png */
+  height: 600px;      /* Match the row height in image_1.png */
+  overflow: hidden;  /* IMPORTANT: Anything that 'scrolls off' becomes invisible */
+  position: relative; /* Setup for advanced infant positioning */
+  border: 1px solid #d9a695; /* (Optional) Add a faint rose gold border */
+  border-radius: 8px; /* (Optional) Smooth corners like the designs */
+}
+
+/* 2. The Belt: A tall stack of all your screenshots */
+.case-study-belt {
+  display: flex;
+  flex-direction: column; /* Stack images vertically */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  
+  /* 3. Attach the animation (Name, Speed, Loops, Style) */
+  animation: moveVertical 20s linear infinite;
+}
+
+/* Make sure all screenshots are the same width */
+.case-study-belt img {
+  width: 100%;
+  height: auto; /* Adjust height based on your layout, e.g., 300px */
+}
+
+/* 4. The Magic Keyframes (The Animation Instructions) */
+@keyframes moveVertical {
+  0% {
+    /* Start with the belt perfectly at the top of the frame */
+    transform: translateY(0);
+  }
+  100% {
+    /* End with the belt moved UP by a specific amount. 
+       We calculate this based on the number of images on your 'belt'.
+       E.g., If you have 4 active images + 2 duplicate images, and each is 300px tall:
+       The belt's total height is 1800px (6*300).
+       To loop seamlessly, we translate it by the height of the 4 original images:
+       1200px (4*300). */
+    transform: translateY(-1200px);
+  }
+}
+
+/* (Optional) Pause the animation when someone is looking/hovering */
+.case-study-frame:hover .case-study-belt {
+  animation-play-state: paused;
+}
